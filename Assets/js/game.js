@@ -21,9 +21,12 @@
 
 var catalog = ["cat", "bat", "rat", "sat"];
 var solution = ["t", "e", "s", "t"];
+var solvedSet = [];
 var guessed = [];
 var lastGuess;
+var lives = 6;
 
+//check if key pressed is a valid a - z character. Caps are allowed
 function validLetterCheck(keyCode) {
 	console.log(keyCode);
 	if ((keyCode >= 65 && keyCode <= 90) || 
@@ -37,21 +40,41 @@ function validLetterCheck(keyCode) {
 	}
 }
 
+//check if the key pressed has already been guessed. If no, continue to see if the guess is correct.
 function repeatCheck(letter) {
-	if (guessed.indexOf(letter) !== -1) {
-		alert("You have already guessed '" + letter.toUpperCase() + "'. Guess again.");
-		console.log("invalid keypress");
-	}
-	else {
+	if (guessed.indexOf(letter) === -1) {
 		guessed.push(letter);
 		console.log(guessed);
+		correctCheck(letter);
+		console.log(letter);
+	}
+	else {
+		alert("You have already guessed '" + letter.toUpperCase() + "'. Guess again.");
+		console.log("invalid keypress");
 	}
 }
 
 function correctCheck (letter) {
-	if (solution.indexOf(letter) === -1) {
-
+	if (solution.indexOf(letter) !== -1) {
+		console.log("correct guess");
+		console.log(solution);
+		returnCorrectIndex(letter);
 	}
+	else {
+		lives--;
+		console.log(lives + " lives remaining");
+	}
+}
+
+function returnCorrectIndex(letter) {
+	for ( var i = 0; i < solution.length; i++) {
+		if ( solution[i] === letter ) {
+			solvedSet[i] = letter
+		}
+	}
+	console.log(solvedSet);
+	console.log(toString(solution));
+	console.log(solvedSet.toString);
 }
 
 document.onkeyup = function(event) {
