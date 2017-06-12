@@ -1,0 +1,31 @@
+html {
+	height: 100%;
+}
+
+body {
+	background-image: url(../images/starfieldBlue.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	color: #FFF;
+}
+
+
+
+
+
+.gameBox {
+	margin-top: 30px;
+}
+
+
+
+
+
+
+
+
+
+
+#solvedDisplay {
+	letter-spacing: 10px;
+}

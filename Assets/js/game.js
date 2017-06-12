@@ -12,13 +12,11 @@
 	If it is, prompt user for a new entry
 	if not, add it to the array and update the display
 	check if the guess is correct
-	if incorrect, decrease 'lives' by 1 and update the display
+	if incorrect, decrease 'health' by 1 and update the display
 	if correct, reveal the letter(s)
-		get the indexOf for each match
-		update html for according to returned index(es)
-		replace matched letters with 'blanks' into the array
 */
 
+// The hangman game object
 var game = {
 	catalog: ["abruptly", "absurd", "abyss", "affix", "askew", "avenue", "awkward", 
 				"axiom", "azure", "bagpipes", "bandwagon", "banjo", "bayou", "beekeeper", 
@@ -44,7 +42,7 @@ var game = {
 				"scratch", "shiv", "snazzy", "sphinx", "spritz", "squawk", "staff", "strength", 
 				"strengths", "stretch", "stronghold", "stymied", "subway", "swivel", "syndrome", 
 				"thriftless", "thumbscrew", "topaz", "transcript", "transgress", "transplant", 
-				"triphthong", "twelfth", "twelfths", "unknown", "unworthy", "unzip", "uptown", 
+				"twelfth", "twelfths", "unknown", "unworthy", "unzip", "uptown", 
 				"vaporize", "vixen", "vodka", "voodoo", "vortex", "voyeurism", "walkway", "waltz", 
 				"wave", "wavy", "waxy", "wellspring", "wheezy", "whiskey", "whizzing", "whomever", 
 				"wimpy", "witchcraft", "wizard", "woozy", "wristwatch", "wyvern", "xylophone", 
@@ -53,27 +51,55 @@ var game = {
 	solution: [],
 	solvedSet: [],
 	guessed: [],
-	lastGuess: " ",
-	lives: 6,
+	health: 6,
+	lives: 3,
+	level: 1,
 	
 
-	//Initialize the game
-	initialize: function() {
+
+	//Initialize the game. Reset the variables. Clear the board.
+	newGame: function() {
+		game.solvedSet = [];
+		game.guessed = [];
+		game.health = 6;
 		game.solution = game.catalog[Math.floor(Math.random() * game.catalog.length)].split("");
 		console.log("Solution: " + game.solution);
 		for (i = 0; i < game.solution.length; i++) {
 			game.solvedSet[i] = "_";
 		}
-		game.guessed = [];
-		game.lives = 6;
+		document.getElementById("solvedDisplay").innerHTML = game.solvedSet.join("");
+		document.getElementById("guessedDisplay").innerHTML = "Already Guessed: " + game.guessed;
+		document.getElementById("healthDisplay").innerHTML = "Health Remaining: " + game.health;
+		document.getElementById("livesDisplay").innerHTML = "Lives Remaining: " + game.lives;
+		document.getElementById("levelDisplay").innerHTML = "Level: " + game.level;
+		// document.getElementById("messageDisplay").innerHTML = "NEW GAME";
 	},
 
-	//check if key pressed is a valid a - z character. Caps are allowed
+	newPuzzle: function() {
+		game.solvedSet = [];
+		game.guessed = [];
+		game.health = 6;
+		game.solution = game.catalog[Math.floor(Math.random() * game.catalog.length)].split("");
+		console.log("Solution: " + game.solution);
+		for (i = 0; i < game.solution.length; i++) {
+			game.solvedSet[i] = "_";
+		}
+		document.getElementById("solvedDisplay").innerHTML = game.solvedSet.join("");
+		document.getElementById("guessedDisplay").innerHTML = "Already Guessed: " + game.guessed;
+		document.getElementById("healthDisplay").innerHTML = "Health Remaining: " + game.health;
+		document.getElementById("livesDisplay").innerHTML = "Lives Remaining: " + game.lives;
+		document.getElementById("levelDisplay").innerHTML = "Level: " + game.level;
+		// document.getElementById("messageDisplay").innerHTML = "NEW GAME";
+	},
+
+	//check if key pressed is a valid a - z character. Caps are allowed. If yes, pass it on
+	//to the next function
 	validLetterCheck: function(keyCode) {
 		if ((keyCode >= 65 && keyCode <= 90) || 
 			(keyCode >= 97 && keyCode <= 122)) {
 			console.log("valid key");
-			game.repeatCheck(game.lastGuess);
+			var letter = String.fromCharCode(keyCode).toLowerCase();
+			game.repeatCheck(letter);
 		}
 		else {
 			console.log("invalid key");
@@ -86,6 +112,7 @@ var game = {
 		if (game.guessed.indexOf(letter) === -1) {
 			game.guessed.push(letter);
 			console.log("past guesses: " + game.guessed);
+			document.getElementById("guessedDisplay").innerHTML = "Already Guessed: " + game.guessed;
 			game.correctCheck(letter);
 			console.log(letter);
 		}
@@ -96,17 +123,19 @@ var game = {
 	},
 
 	//check if the guess is correct and if so, proceed to uppdate the solvedSet.
-	//if not, reduce lives by one
+	//if not, reduce health by one
 	correctCheck: function(letter) {
 		if (game.solution.indexOf(letter) !== -1) {
 			console.log("correct guess: " + letter);
-			console.log("solution: " + game.solution);
+			document.getElementById("messageDisplay").innerHTML = "Correct!";
 			game.submitToSolvedSet(letter);
 		}
 		else {
-			game.lives--;
-			console.log("Incorrect Guess. " + game.lives + " lives remaining");
-			game.noLivesCheck();
+			game.health--;
+			console.log("Incorrect Guess. " + game.health + " health remaining");
+			document.getElementById("healthDisplay").innerHTML = "Health Remaining: " + game.health;
+			document.getElementById("messageDisplay").innerHTML = "Incorrect";
+			game.noHealthCheck();
 		}
 	},
 
@@ -119,6 +148,7 @@ var game = {
 			}
 		}
 		console.log("Solved set: " + game.solvedSet);
+		document.getElementById("solvedDisplay").innerHTML = game.solvedSet.join("");
 		game.puzzleSolvedCheck();
 	},
 
@@ -132,40 +162,48 @@ var game = {
 	//You win! Game over
 	youWin: function() {
 		console.log("Game Over - you win");
-		game.initialize();
+		game.level++;
+		console.log("level: " + game.level);
+		document.getElementById("levelDisplay").innerHTML = "Level: " + game.level;
+		document.getElementById("messageDisplay").innerHTML = "YOU WIN!";
+		game.newGame();
 	},
 
 	//Did you die?
-	noLivesCheck: function() {
-		if (game.lives === 0) {
+	noHealthCheck: function() {
+		if (game.health === 0) {
 			game.youLose();
 		}
 	},
 
-	//Game over. Try again
+	//You died. Try again
 	youLose: function() {
-		console.log("Game over - you lose");
-		game.initialize();
+		game.lives--;
+		if (game.lives === 0) {
+			game.gameOver();
+		}
+		else {
+			console.log("Game over - you lose");
+			document.getElementById("messageDisplay").innerHTML = "New Life - GET READY!";
+			game.newPuzzle();
+		}
+	},
+
+	//If no lives remain, Game Over.
+	gameOver: function() {
+		console.log
+		document.getElementById("messageDisplay").innerHTML = "GAME OVER";
+		game.level = 1;
+		game.lives = 3;
+		game.newGame();
 	},
 }
 
 
+// Click the NEW GAME button to start a new game
+document.getElementById("newGameBtn").addEventListener("click", game.newGame); 
 
-	
-
-
-
-
-
-
-
-
-
-// Initialize a new game on page load
-game.initialize();
-
-//start the game process tree on key release
+// Start the game process tree on key release
 document.onkeyup = function(event) {
-	game.lastGuess = event.key.toLowerCase();
 	game.validLetterCheck(event.keyCode);
-} 
+}
