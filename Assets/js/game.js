@@ -62,16 +62,13 @@ var game = {
 		game.solvedSet = [];
 		game.guessed = [];
 		game.health = 6;
+		game.lives = 3;
 		game.solution = game.catalog[Math.floor(Math.random() * game.catalog.length)].split("");
 		console.log("Solution: " + game.solution);
 		for (i = 0; i < game.solution.length; i++) {
 			game.solvedSet[i] = "_";
 		}
-		document.getElementById("solvedDisplay").innerHTML = game.solvedSet.join("");
-		document.getElementById("guessedDisplay").innerHTML = "Already Guessed: " + game.guessed;
-		document.getElementById("healthDisplay").innerHTML = "Health Remaining: " + game.health;
-		document.getElementById("livesDisplay").innerHTML = "Lives Remaining: " + game.lives;
-		document.getElementById("levelDisplay").innerHTML = "Level: " + game.level;
+		game.refreshDisplay();
 		// document.getElementById("messageDisplay").innerHTML = "NEW GAME";
 	},
 
@@ -84,12 +81,16 @@ var game = {
 		for (i = 0; i < game.solution.length; i++) {
 			game.solvedSet[i] = "_";
 		}
+		game.refreshDisplay();
+		// document.getElementById("messageDisplay").innerHTML = "NEW GAME";
+	},
+
+	refreshDisplay: function() {
 		document.getElementById("solvedDisplay").innerHTML = game.solvedSet.join("");
 		document.getElementById("guessedDisplay").innerHTML = "Already Guessed: " + game.guessed;
 		document.getElementById("healthDisplay").innerHTML = "Health Remaining: " + game.health;
 		document.getElementById("livesDisplay").innerHTML = "Lives Remaining: " + game.lives;
 		document.getElementById("levelDisplay").innerHTML = "Level: " + game.level;
-		// document.getElementById("messageDisplay").innerHTML = "NEW GAME";
 	},
 
 	//check if key pressed is a valid a - z character. Caps are allowed. If yes, pass it on
@@ -165,7 +166,7 @@ var game = {
 		game.level++;
 		console.log("level: " + game.level);
 		document.getElementById("levelDisplay").innerHTML = "Level: " + game.level;
-		document.getElementById("messageDisplay").innerHTML = "YOU WIN!";
+		document.getElementById("messageDisplay").innerHTML = "NEXT LEVEL";
 		game.newGame();
 	},
 

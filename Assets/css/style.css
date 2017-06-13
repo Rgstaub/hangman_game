@@ -1,3 +1,8 @@
+/*font-family: 'Orbitron', sans-serif;
+font-family: 'Press Start 2P', cursive;
+font-family: 'Gruppo', cursive;*/
+
+
 html {
 	height: 100%;
 }
@@ -17,15 +22,93 @@ body {
 	margin-top: 30px;
 }
 
+.hud {
+	background-color: transparent;
+	color: #9bf3ff;
+	font-size: 200%;
+	font-family: 'Orbitron', sans-serif;
+	text-shadow: 2px 2px 20px #0ae0fc;
+	line-height
+}
+
+.opaque {
+	opacity: 1.0;
+}
 
 
+#messageDisplay {
+	text-align: center;
+	color: #fcc7f2;
+	text-shadow: 2px 2px 20px #f92cd3;
+	font-size: 300%;
+}
 
+#newGameBtn {
+	background-color: transparent;
+	color: #9bf3ff;
+	font-size: 150%;
+	font-family: 'Orbitron', sans-serif;
+	text-shadow: 2px 2px 20px #0ae0fc;
+	border: #9bf3ff 2px solid;
+	box-shadow: 2px 2px 20px #0ae0fc;
+}
 
-
-
-
-
+#newGameBtn:hover {
+	color: #fcf9a1;
+	text-shadow: 2px 2px 20px #def957;
+	box-shadow: 2px 2px 20px #def957;
+	border-color: #fcf9a1;
+	transition: all .5s;
+}
 
 #solvedDisplay {
-	letter-spacing: 10px;
+	letter-spacing: 20px;
+	font-size: 400%;
+	text-align: center;
 }
+
+#background {
+	background: black url(../images/background.png) repeat 5% 5%;
+	position: absolute;
+	top: 0; left: 0; right: 0; bottom: 0;
+	z-index: 100;
+	
+	-webkit-animation-name: STAR-MOVE;
+	-webkit-animation-duration: 200s;
+	-webkit-animation-timing-function: linear;
+	-webkit-animation-iteration-count: infinite;
+}
+
+#midground {
+	background: url(../images/midground.png) repeat 20% 20%;
+	position: absolute;
+	top: 0; left: 0; right: 0; bottom: 0;
+	z-index: 200;
+	
+	-webkit-animation-name: STAR-MOVE;
+	-webkit-animation-duration: 150s;
+	-webkit-animation-timing-function: linear;
+	-webkit-animation-iteration-count: infinite;
+}
+
+#foreground {
+	background: url(../images/foreground.png) repeat 35% 35%;
+	position: absolute;
+	top: 0; left: 0; right: 0; bottom: 0;
+	z-index: 300;
+	
+	-webkit-animation-name: STAR-MOVE;
+	-webkit-animation-duration: 50s;
+	-webkit-animation-timing-function: linear;
+	-webkit-animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes STAR-MOVE {
+	from {
+		background-position: 0% 0%
+	}
+	to { 
+		background-position: 0% 1300%
+	}
+}
+
