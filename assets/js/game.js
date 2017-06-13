@@ -67,6 +67,7 @@ var game = {
 		for (i = 0; i < game.solution.length; i++) {
 			game.solvedSet[i] = "_";
 		}
+		document.getElementById("newGameSound").play();
 		game.refreshDisplay();
 		// document.getElementById("messageDisplay").innerHTML = "NEW GAME";
 	},
@@ -128,6 +129,7 @@ var game = {
 		if (game.solution.indexOf(letter) !== -1) {
 			console.log("correct guess: " + letter);
 			document.getElementById("messageDisplay").innerHTML = "Correct!";
+			document.getElementById("correctSound").play();
 			game.submitToSolvedSet(letter);
 		}
 		else {
@@ -135,6 +137,7 @@ var game = {
 			console.log("Incorrect Guess. " + game.health + " health remaining");
 			document.getElementById("healthDisplay").innerHTML = "Health Remaining: " + game.health;
 			document.getElementById("messageDisplay").innerHTML = "Incorrect";
+			document.getElementById("incorrectSound").play();
 			game.noHealthCheck();
 		}
 	},
@@ -166,7 +169,8 @@ var game = {
 		console.log("level: " + game.level);
 		document.getElementById("levelDisplay").innerHTML = "Level: " + game.level;
 		document.getElementById("messageDisplay").innerHTML = "NEXT LEVEL";
-		game.newGame();
+		document.getElementById("nextLevelSound").play();
+		game.newPuzzle();
 	},
 
 	//Did you die?
@@ -198,6 +202,8 @@ var game = {
 		game.newGame();
 	},
 }
+
+
 
 // Click the NEW GAME button to start a new game
 document.getElementById("newGameBtn").addEventListener("click", game.newGame); 

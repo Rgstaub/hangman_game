@@ -10,34 +10,47 @@
 	<title>Hangman</title>
 </head>
 <body>
-	<audio controls="controls">
-  		<source src="assets/images/music.mp3" type="audio/mpeg">
-		Your browser does not support the audio element.
+	<audio autoplay loop>
+      	<source src="assets/sounds/music.mp3">
+      	Your browser is not compatible with this site's audio
+	</audio>
+	<audio  id="correctSound">
+		<source src="assets/sounds/correct.mp3">
+	</audio>
+	<audio id="incorrectSound">
+		<source src="assets/sounds/incorrectTrimmed.mp3">
+	</audio>
+	<audio id="newGameSound">
+		<source src="assets/sounds/newGameTrimmed.mp3">
+	</audio>
+	<audio id="nextLevelSound">
+		<source src="assets/sounds/nextLevel.mp3">
 	</audio>
 	<div id="foreground">
-	<div id="midground">
-	<!-- <div id="background"> -->
-	<div class="container gameBox">
-		<div class="row">
-			<button class="btn btn-deault col-ms-offset-4" id="newGameBtn">New Game</button>
-			<div class="col-md-6 panel hud">
-				<div class="panel-body">
-					<div id="guessedDisplay"></div>
-					<div id="healthDisplay"></div>
-					<div id="livesDisplay"></div>
-					<div id="levelDisplay"></div>
+		<div id="midground">
+			<div class="container gameBox">
+				<div class="row">
+					<button class="btn btn-deault col-ms-offset-4" id="newGameBtn">New Game</button>
+					<div class="col-md-6 panel hud">
+						<div class="panel-body">
+							<div id="guessedDisplay"></div>
+							<div id="healthDisplay"></div>
+							<div id="livesDisplay"></div>
+							<div id="levelDisplay"></div>
+						</div>
+					</div>
+				</div>
+				<div id="spacer" class="row">
+					<div class="col-xs-12"></div>
+				</div>
+				<div class="row">
+					<div class="hud" id="messageDisplay"></div>
+					<div class="hud col-xs-12" id="solvedDisplay"></div>
 				</div>
 			</div>
-			
-		</div>
-		<div class="row">
-			<div class="hud" id="messageDisplay"></div>
-			<div class="hud col-xs-12" id="solvedDisplay"></div>
 		</div>
 	</div>
-	</div>
-	</div>
-	<!-- </div> -->
+
 	<script src="assets/js/jquery.js"></script>
 	<script src="assets/js/bootstrap.js"></script>
 	<script src="assets/js/game.js"></script>

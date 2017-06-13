@@ -31,12 +31,16 @@ body {
 	opacity: 1.0;
 }
 
+#backgroundMusic {
+	display: hidden;
+}
 
 #messageDisplay {
 	text-align: center;
 	color: #fcc7f2;
 	text-shadow: 2px 2px 20px #f92cd3;
 	font-size: 300%;
+	height: 300px;
 }
 
 #newGameBtn {
@@ -63,17 +67,11 @@ body {
 	text-align: center;
 }
 
-#background {
-	background: black url(../images/background.png) repeat 5% 5%;
-	position: absolute;
-	top: 0; left: 0; right: 0; bottom: 0;
-	z-index: 100;
-	
-	-webkit-animation-name: STAR-MOVE;
-	-webkit-animation-duration: 200s;
-	-webkit-animation-timing-function: linear;
-	-webkit-animation-iteration-count: infinite;
+#spacer {
+	position: fixed;
+	bottom: 50%;
 }
+
 
 #midground {
 	background: url(../images/midground.png) repeat 20% 20%;
@@ -82,7 +80,7 @@ body {
 	z-index: 200;
 	
 	-webkit-animation-name: STAR-MOVE;
-	-webkit-animation-duration: 150s;
+	-webkit-animation-duration: 250s;
 	-webkit-animation-timing-function: linear;
 	-webkit-animation-iteration-count: infinite;
 }
@@ -94,7 +92,7 @@ body {
 	z-index: 300;
 	
 	-webkit-animation-name: STAR-MOVE;
-	-webkit-animation-duration: 50s;
+	-webkit-animation-duration: 150s;
 	-webkit-animation-timing-function: linear;
 	-webkit-animation-iteration-count: infinite;
 }
