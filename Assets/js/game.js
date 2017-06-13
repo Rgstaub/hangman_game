@@ -200,7 +200,6 @@ var game = {
 	},
 }
 
-
 // Click the NEW GAME button to start a new game
 document.getElementById("newGameBtn").addEventListener("click", game.newGame); 
 
