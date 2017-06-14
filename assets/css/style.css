@@ -22,6 +22,14 @@ body {
 	border: yellow 1px dashed;
 }*/
 
+.fadeOut {
+	opacity: 0;
+}
+
+.visible {
+	opacity: 1;
+}
+
 .gameBox {
 	margin-top: 30px;
 }
@@ -59,6 +67,7 @@ body {
 	text-shadow: 2px 2px 20px #f92cd3;
 	font-size: 300%;
 	height: 300px;
+	-webkit-transition: opacity 3s ease-in-out;
 }
 
 #muteButton {
@@ -70,7 +79,7 @@ body {
 }
 
 #muteButton:hover {
-	color: #fcf9a1;
+	color: #fafcea;
 	text-shadow: 2px 2px 20px #def957;
 	transition: all .5s;
 }
@@ -81,15 +90,15 @@ body {
 	font-size: 150%;
 	font-family: 'Orbitron', sans-serif;
 	text-shadow: 2px 2px 20px #0ae0fc;
-	border: #9bf3ff 2px solid;
+	border: #9bf3ff 1px solid;
 	box-shadow: 2px 2px 20px #0ae0fc;
 }
 
 #newGameBtn:hover {
-	color: #fcf9a1;
+	color: #fafcea;
 	text-shadow: 2px 2px 20px #def957;
 	box-shadow: 2px 2px 20px #def957;
-	border-color: #fcf9a1;
+	border-color: #fafcea;
 	transition: all .5s;
 }
 
@@ -135,5 +144,14 @@ body {
 	}
 	to { 
 		background-position: 0% 1300%
+	}
+}
+
+@-webkit-keyframes FADE-OUT {
+	from {
+		opacity: 100%;
+	}
+	to {
+		opacity: 0%;
 	}
 }

@@ -10,25 +10,18 @@
 	<title>Hangman</title>
 </head>
 <body>
-	<audio id="backGroundMusic" autoplay loop>
-      	<source src="assets/sounds/music.mp3">
-      	Your browser is not compatible with this site's audio
-	</audio>
-	<audio  id="correctSound">
-		<source src="assets/sounds/correct.mp3">
-	</audio>
-	<audio id="incorrectSound">
-		<source src="assets/sounds/incorrectTrimmed.mp3">
-	</audio>
-	<audio id="newGameSound">
-		<source src="assets/sounds/newGameTrimmed.mp3">
-	</audio>
-	<audio id="nextLevelSound">
-		<source src="assets/sounds/nextLevel.mp3">
-	</audio>
+	<!-- Link the audio assets to be called by Javascript -->
+	<audio id="backGroundMusic" src="assets/sounds/music.mp3" autoplay loop>Your browser is not compatible with this site's audio</audio>
+	<audio  id="correctSound" src="assets/sounds/correct.mp3"></audio>
+	<audio id="incorrectSound" src="assets/sounds/incorrectTrimmed.mp3"></audio>
+	<audio id="newGameSound" src="assets/sounds/newGameTrimmed.mp3"></audio>
+	<audio id="nextLevelSound" src="assets/sounds/nextLevel.mp3"></audio>
 	<audio id="invalidKeySound" src="assets/sounds/invalid.wav"></audio>
+	<audio id="diedSound" src="assets/sounds/died.mp3"></audio>
+	<!-- Scrolling star background -->
 	<div id="foreground">
 		<div id="midground">
+			<!-- Game content area -->
 			<div class="container gameBox">
 				<div class="row">
 					<button class="btn btn-deault" id="newGameBtn">New Game</button>

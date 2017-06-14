@@ -221,7 +221,9 @@ var game = {
 			game.gameOver();
 		}
 		else {
-			console.log("Game over - you lose");
+			if (game.muted === false) {
+				document.getElementById("diedSound").play();
+			}
 			document.getElementById("messageDisplay").innerHTML = "New Life - GET READY!";
 			game.newPuzzle();
 		}
