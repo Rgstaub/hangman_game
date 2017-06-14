@@ -32,7 +32,10 @@ body {
 	font-size: 200%;
 	font-family: 'Orbitron', sans-serif;
 	text-shadow: 2px 2px 20px #0ae0fc;
+}
 
+.letter {
+	text-align: center;
 }
 
 .opaque {
@@ -44,9 +47,10 @@ body {
 	text-shadow: none;
 }
 
-.unpicked {
-	color: #9bf3ff;
-	text-shadow: 2px 2px 20px #0ae0fc;
+.unpicked:hover {
+	color: #fff;
+	text-shadow: 2px 2px 20px #fff;
+	transition: all .5s;
 }
 
 #messageDisplay {
@@ -55,6 +59,20 @@ body {
 	text-shadow: 2px 2px 20px #f92cd3;
 	font-size: 300%;
 	height: 300px;
+}
+
+#muteButton {
+	background-color: transparent;
+	color: #9bf3ff;
+	font-size: 250%;
+	text-shadow: 2px 2px 20px #0ae0fc;
+	border-style: none;
+}
+
+#muteButton:hover {
+	color: #fcf9a1;
+	text-shadow: 2px 2px 20px #def957;
+	transition: all .5s;
 }
 
 #newGameBtn {
@@ -90,7 +108,7 @@ body {
 #midground {
 	background: url(../images/midground.png) repeat 20% 20%;
 	position: absolute;
-	top: 0; left: 0; right: 0; bottom: 0;
+	top: 0; left: 6px; right: 0; bottom: 0;
 	z-index: 200;
 	
 	-webkit-animation-name: STAR-MOVE;

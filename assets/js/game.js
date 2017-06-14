@@ -53,7 +53,21 @@ var game = {
 	health: 6,
 	lives: 3,
 	level: 1,
+	muted: false,
 	
+	toggleSound: function(className) {
+		
+		if (className === "glyphicon glyphicon-volume-up") {
+			document.getElementById("muteButton").className = "glyphicon glyphicon-volume-off";
+			game.muted = true;
+			document.getElementById("backGroundMusic").pause();
+		}
+		else {
+			document.getElementById("muteButton").className = "glyphicon glyphicon-volume-up";
+			game.muted = false;
+			document.getElementById("backGroundMusic").play();
+		}
+	},
 
 
 	//Initialize the game. Reset the variables. Clear the board.
@@ -67,7 +81,9 @@ var game = {
 		for (i = 0; i < game.solution.length; i++) {
 			game.solvedSet[i] = "_";
 		}
-		document.getElementById("newGameSound").play();
+		if (game.muted === false) {
+			document.getElementById("newGameSound").play();
+		}
 		game.refreshDisplay();
 		// document.getElementById("messageDisplay").innerHTML = "NEW GAME";
 	},
@@ -78,11 +94,11 @@ var game = {
 		game.health = 6;
 		game.solution = game.catalog[Math.floor(Math.random() * game.catalog.length)].split("");
 		console.log("Solution: " + game.solution);
+		//Fill the solvedSet with '_' for each letter according to the length of the solution
 		for (i = 0; i < game.solution.length; i++) {
 			game.solvedSet[i] = "_";
 		}
 		game.refreshDisplay();
-		// document.getElementById("messageDisplay").innerHTML = "NEW GAME";
 	},
 
 	refreshDisplay: function() {
@@ -91,12 +107,14 @@ var game = {
 		document.getElementById("healthDisplay").innerHTML = "Health Remaining: " + game.health;
 		document.getElementById("livesDisplay").innerHTML = "Lives Remaining: " + game.lives;
 		document.getElementById("levelDisplay").innerHTML = "Level: " + game.level;
+		//loop through all of the 'letter'elements to reset the CSS to the un-guessed state
 		var alphabet = document.getElementsByClassName("letter");
-		console.log(alphabet);
 		for (var i = 0; i < alphabet.length; i++) {
-			alphabet[i].classname = "unpicked letter col-xs-3";
+			alphabet[i].className = "unpicked letter col-xs-3";
 		}
 	},
+
+
 
 	//check if key pressed is a valid a - z character. Caps are allowed. If yes, pass it on
 	//to the next function
@@ -109,7 +127,9 @@ var game = {
 		}
 		else {
 			console.log("invalid key");
-			alert("Letters A-Z only!");
+			if (game.muted === false) {
+				document.getElementById("invalidKeySound").play();
+			}
 		}
 	},
 
@@ -124,7 +144,9 @@ var game = {
 			console.log(letter);
 		}
 		else {
-			alert("You have already guessed '" + letter.toUpperCase() + "'. Guess again.");
+			if (game.muted === false) {
+				document.getElementById("invalidKeySound").play();
+			}
 			console.log("invalid letter");
 		}
 	},
@@ -135,7 +157,9 @@ var game = {
 		if (game.solution.indexOf(letter) !== -1) {
 			console.log("correct guess: " + letter);
 			document.getElementById("messageDisplay").innerHTML = "Correct!";
-			document.getElementById("correctSound").play();
+			if (game.muted === false) {
+				document.getElementById("correctSound").play();
+			}
 			game.submitToSolvedSet(letter);
 		}
 		else {
@@ -143,7 +167,9 @@ var game = {
 			console.log("Incorrect Guess. " + game.health + " health remaining");
 			document.getElementById("healthDisplay").innerHTML = "Health Remaining: " + game.health;
 			document.getElementById("messageDisplay").innerHTML = "Incorrect";
-			document.getElementById("incorrectSound").play();
+			if (game.muted === false) {
+				document.getElementById("incorrectSound").play();
+			}
 			game.noHealthCheck();
 		}
 	},
@@ -175,7 +201,9 @@ var game = {
 		console.log("level: " + game.level);
 		document.getElementById("levelDisplay").innerHTML = "Level: " + game.level;
 		document.getElementById("messageDisplay").innerHTML = "NEXT LEVEL";
-		document.getElementById("nextLevelSound").play();
+		if (game.muted === false) {
+			document.getElementById("nextLevelSound").play();
+		}
 		game.newPuzzle();
 	},
 
