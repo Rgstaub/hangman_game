@@ -91,6 +91,11 @@ var game = {
 		document.getElementById("healthDisplay").innerHTML = "Health Remaining: " + game.health;
 		document.getElementById("livesDisplay").innerHTML = "Lives Remaining: " + game.lives;
 		document.getElementById("levelDisplay").innerHTML = "Level: " + game.level;
+		var alphabet = document.getElementsByClassName("letter");
+		console.log(alphabet);
+		for (var i = 0; i < alphabet.length; i++) {
+			alphabet[i].classname = "unpicked letter col-xs-3";
+		}
 	},
 
 	//check if key pressed is a valid a - z character. Caps are allowed. If yes, pass it on
@@ -114,6 +119,7 @@ var game = {
 			game.guessed.push(letter);
 			console.log("past guesses: " + game.guessed);
 			document.getElementById("guessedDisplay").innerHTML = "Already Guessed: " + game.guessed;
+			document.getElementById(letter).className = "picked letter col-xs-3";
 			game.correctCheck(letter);
 			console.log(letter);
 		}
