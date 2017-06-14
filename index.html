@@ -24,20 +24,23 @@
 			<!-- Game content area -->
 			<div class="container gameBox">
 				<div class="row">
-					<button class="btn btn-deault" id="newGameBtn">New Game</button>
-					<div>
-						<span id="muteButton" onclick="game.toggleSound(this.className)" class="glyphicon glyphicon-volume-up"></span>
-					</div>
-					<div class="col-md-6 panel hud">
+					<div class="col-md-6 col-md-offset-2 right panel hud">
 						<div class="panel-body">
-							<div id="guessedDisplay"></div>
+							<div class="controls">
+								<span>
+									<span id="muteButton" onclick="game.toggleSound(this.className)" class="glyphicon glyphicon-volume-up"></span>
+								</span>
+								<button class="btn btn-deault" id="newGameBtn">New Game</button>
+							</div>
+							<br>
 							<div id="healthDisplay"></div>
 							<div id="livesDisplay"></div>
 							<div id="levelDisplay"></div>
 						</div>
 					</div>
-					<!-- The grid of guessed/ungessed letter. Clicking on a valid letter will submit a guess -->
-					<div class="hud col-md-4">
+
+					<!-- The grid of guessed/unguessed letter. Clicking on a valid letter will submit a guess -->
+					<div class="hud col-md-4 letterBox">
 						<div onclick="game.repeatCheck(this.id)" id="a" class="unpicked letter col-xs-3">a</div>
 						<div onclick="game.repeatCheck(this.id)" id="b" class="unpicked letter col-xs-3">b</div>
 						<div onclick="game.repeatCheck(this.id)" id="c" class="unpicked letter col-xs-3">c</div>
@@ -65,6 +68,11 @@
 						<div onclick="game.repeatCheck(this.id)" id="y" class="unpicked letter col-xs-3">y</div>
 						<div onclick="game.repeatCheck(this.id)" id="z" class="unpicked letter col-xs-3">z</div>
 					</div> <!-- End letter grid -->
+
+					
+
+					<!-- The grid of guessed/unguessed letter. Clicking on a valid letter will submit a guess -->
+					
 				</div>
 				
 				<div class="row">

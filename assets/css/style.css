@@ -46,6 +46,19 @@ body {
 	text-align: center;
 }
 
+.letterBox {
+	border-radius: 5px;
+	border-style: solid;
+	border-width: 1px;
+	border-top-color: #9bf3ff;
+	border-left-color: #9bf3ff;
+	border-right-color: #0e6768;
+	border-bottom-color: #0e6768;
+	/*box-shadow: 3px 3px 10px #0ae0fc;*/
+	padding-top: 25px;
+	padding-bottom: 25px;
+}
+
 .opaque {
 	opacity: 1.0;
 }
@@ -53,6 +66,11 @@ body {
 .picked {
 	color: #555;
 	text-shadow: none;
+}
+
+.right {
+	float: right;
+	text-align: right;
 }
 
 .unpicked:hover {
@@ -66,16 +84,20 @@ body {
 	color: #fcc7f2;
 	text-shadow: 2px 2px 20px #f92cd3;
 	font-size: 300%;
-	height: 300px;
+	height: 150px;
 	-webkit-transition: opacity 3s ease-in-out;
+	margin-top: 50px;
 }
 
 #muteButton {
 	background-color: transparent;
 	color: #9bf3ff;
-	font-size: 250%;
+	font-size: 150%;
 	text-shadow: 2px 2px 20px #0ae0fc;
 	border-style: none;
+	position: absolute;
+	top: 22px;
+	right: 250px;
 }
 
 #muteButton:hover {
@@ -87,7 +109,7 @@ body {
 #newGameBtn {
 	background-color: transparent;
 	color: #9bf3ff;
-	font-size: 150%;
+	font-size: 100%;
 	font-family: 'Orbitron', sans-serif;
 	text-shadow: 2px 2px 20px #0ae0fc;
 	border: #9bf3ff 1px solid;

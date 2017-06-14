@@ -103,7 +103,6 @@ var game = {
 
 	refreshDisplay: function() {
 		document.getElementById("solvedDisplay").innerHTML = game.solvedSet.join("");
-		document.getElementById("guessedDisplay").innerHTML = "Already Guessed: " + game.guessed;
 		document.getElementById("healthDisplay").innerHTML = "Health Remaining: " + game.health;
 		document.getElementById("livesDisplay").innerHTML = "Lives Remaining: " + game.lives;
 		document.getElementById("levelDisplay").innerHTML = "Level: " + game.level;
@@ -138,7 +137,6 @@ var game = {
 		if (game.guessed.indexOf(letter) === -1) {
 			game.guessed.push(letter);
 			console.log("past guesses: " + game.guessed);
-			document.getElementById("guessedDisplay").innerHTML = "Already Guessed: " + game.guessed;
 			document.getElementById(letter).className = "picked letter col-xs-3";
 			game.correctCheck(letter);
 			console.log(letter);
@@ -165,7 +163,7 @@ var game = {
 		else {
 			game.health--;
 			console.log("Incorrect Guess. " + game.health + " health remaining");
-			document.getElementById("healthDisplay").innerHTML = "Health Remaining: " + game.health;
+			document.getElementById("healthDisplay").innerHTML = "Guesses Remaining: " + game.health;
 			document.getElementById("messageDisplay").innerHTML = "Incorrect";
 			if (game.muted === false) {
 				document.getElementById("incorrectSound").play();
