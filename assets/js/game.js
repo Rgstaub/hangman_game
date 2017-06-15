@@ -105,7 +105,7 @@ var game = {
 
 	refreshDisplay: function() {
 		document.getElementById("solvedDisplay").innerHTML = game.solvedSet.join("");
-		document.getElementById("healthDisplay").innerHTML = "Health Remaining: " + game.health;
+		document.getElementById("healthDisplay").innerHTML = "Guesses Remaining: " + game.health;
 		document.getElementById("livesDisplay").innerHTML = "Lives Remaining: " + game.lives;
 		document.getElementById("levelDisplay").innerHTML = "Level: " + game.level;
 		//loop through all of the 'letter'elements to reset the CSS to the un-guessed state

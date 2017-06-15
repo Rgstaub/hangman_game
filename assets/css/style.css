@@ -10,7 +10,7 @@ html {
 body {
 	background-image: url(../images/starfieldBlue.jpg);
 	background-size: cover;
-	background-repeat: no-repeat;
+	background-repeat: repeat-y;
 	color: #FFF;
 }
 
