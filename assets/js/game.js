@@ -85,10 +85,12 @@ var game = {
 			document.getElementById("newGameSound").play();
 		}
 		game.refreshDisplay();
+		document.getElementById("messageDisplay").innerHTML = " ";
 		// document.getElementById("messageDisplay").innerHTML = "NEW GAME";
 	},
 
 	newPuzzle: function() {
+		
 		game.solvedSet = [];
 		game.guessed = [];
 		game.health = 6;
@@ -164,7 +166,7 @@ var game = {
 			game.health--;
 			console.log("Incorrect Guess. " + game.health + " health remaining");
 			document.getElementById("healthDisplay").innerHTML = "Guesses Remaining: " + game.health;
-			document.getElementById("messageDisplay").innerHTML = "Incorrect";
+			document.getElementById("messageDisplay").innerHTML = "(" + letter + ") Incorrect";
 			if (game.muted === false) {
 				document.getElementById("incorrectSound").play();
 			}
@@ -222,7 +224,7 @@ var game = {
 			if (game.muted === false) {
 				document.getElementById("diedSound").play();
 			}
-			document.getElementById("messageDisplay").innerHTML = "New Life - GET READY!";
+			document.getElementById("messageDisplay").innerHTML = "<p>YOU LOSE</p>Solution: " + game.solution.join("");
 			game.newPuzzle();
 		}
 	},
@@ -230,14 +232,14 @@ var game = {
 	//If no lives remain, Game Over.
 	gameOver: function() {
 		console.log
-		document.getElementById("messageDisplay").innerHTML = "GAME OVER";
+		document.getElementById("messageDisplay").innerHTML = "<p>GAME OVER</p>Solution: " + game.solution.join("");
 		game.level = 1;
 		game.lives = 3;
 		game.newGame();
 	},
 }
 
-
+$(document).ready(game.newGame());
 
 // Click the NEW GAME button to start a new game
 document.getElementById("newGameBtn").addEventListener("click", game.newGame); 

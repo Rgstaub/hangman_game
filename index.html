@@ -16,15 +16,16 @@
 	<audio id="incorrectSound" src="assets/sounds/incorrectTrimmed.mp3"></audio>
 	<audio id="newGameSound" src="assets/sounds/newGameTrimmed.mp3"></audio>
 	<audio id="nextLevelSound" src="assets/sounds/nextLevel.mp3"></audio>
-	<audio id="invalidKeySound" src="assets/sounds/invalid.wav"></audio>
+	<audio id="invalidKeySound" src="assets/sounds/invalid.wav" type="audio/wav"></audio>
 	<audio id="diedSound" src="assets/sounds/died.mp3"></audio>
 	<!-- Scrolling star background -->
 	<div id="foreground">
 		<div id="midground">
 			<!-- Game content area -->
-			<div class="container gameBox">
+			<div class="container-fluid gameBox">
 				<div class="row">
-					<div class="col-md-6 col-md-offset-2 right panel hud">
+					<!-- The grid of guessed/unguessed letter. Clicking on a valid letter will submit a guess -->
+					<div class="col-md-6 col-xs-12 right panel hud">
 						<div class="panel-body">
 							<div class="controls">
 								<span>
@@ -38,51 +39,46 @@
 							<div id="levelDisplay"></div>
 						</div>
 					</div>
+					<div class="hud col-xs-12 col-md-6 letterBox">
+						<div class="row">
+							<div onclick="game.repeatCheck(this.id)" id="a" class="unpicked letter col-xs-3">a</div>
+							<div onclick="game.repeatCheck(this.id)" id="b" class="unpicked letter col-xs-3">b</div>
+							<div onclick="game.repeatCheck(this.id)" id="c" class="unpicked letter col-xs-3">c</div>
+							<div onclick="game.repeatCheck(this.id)" id="d" class="unpicked letter col-xs-3">d</div>
+							<div onclick="game.repeatCheck(this.id)" id="e" class="unpicked letter col-xs-3">e</div>
+							<div onclick="game.repeatCheck(this.id)" id="f" class="unpicked letter col-xs-3">f</div>
+							<div onclick="game.repeatCheck(this.id)" id="g" class="unpicked letter col-xs-3">g</div>
+							<div onclick="game.repeatCheck(this.id)" id="h" class="unpicked letter col-xs-3">h</div>
+							<div onclick="game.repeatCheck(this.id)" id="i" class="unpicked letter col-xs-3">i</div>
+							<div onclick="game.repeatCheck(this.id)" id="j" class="unpicked letter col-xs-3">j</div>
+							<div onclick="game.repeatCheck(this.id)" id="k" class="unpicked letter col-xs-3">k</div>
+							<div onclick="game.repeatCheck(this.id)" id="l" class="unpicked letter col-xs-3">l</div>
+							<div onclick="game.repeatCheck(this.id)" id="m" class="unpicked letter col-xs-3">m</div>
+							<div onclick="game.repeatCheck(this.id)" id="n" class="unpicked letter col-xs-3">n</div>
+							<div onclick="game.repeatCheck(this.id)" id="o" class="unpicked letter col-xs-3">o</div>
+							<div onclick="game.repeatCheck(this.id)" id="p" class="unpicked letter col-xs-3">p</div>
+							<div onclick="game.repeatCheck(this.id)" id="q" class="unpicked letter col-xs-3">q</div>
+							<div onclick="game.repeatCheck(this.id)" id="r" class="unpicked letter col-xs-3">r</div>
+							<div onclick="game.repeatCheck(this.id)" id="s" class="unpicked letter col-xs-3">s</div>
+							<div onclick="game.repeatCheck(this.id)" id="t" class="unpicked letter col-xs-3">t</div>
+							<div onclick="game.repeatCheck(this.id)" id="u" class="unpicked letter col-xs-3">u</div>
+							<div onclick="game.repeatCheck(this.id)" id="v" class="unpicked letter col-xs-3">v</div>
+							<div onclick="game.repeatCheck(this.id)" id="w" class="unpicked letter col-xs-3">w</div>
+							<div onclick="game.repeatCheck(this.id)" id="x" class="unpicked letter col-xs-3">x</div>
+							<div onclick="game.repeatCheck(this.id)" id="y" class="unpicked letter col-xs-3">y</div>
+							<div onclick="game.repeatCheck(this.id)" id="z" class="unpicked letter col-xs-3">z</div>
+						</div> <!-- End letter grid -->
+					</div>
 
-					<!-- The grid of guessed/unguessed letter. Clicking on a valid letter will submit a guess -->
-					<div class="hud col-md-4 letterBox">
-						<div onclick="game.repeatCheck(this.id)" id="a" class="unpicked letter col-xs-3">a</div>
-						<div onclick="game.repeatCheck(this.id)" id="b" class="unpicked letter col-xs-3">b</div>
-						<div onclick="game.repeatCheck(this.id)" id="c" class="unpicked letter col-xs-3">c</div>
-						<div onclick="game.repeatCheck(this.id)" id="d" class="unpicked letter col-xs-3">d</div>
-						<div onclick="game.repeatCheck(this.id)" id="e" class="unpicked letter col-xs-3">e</div>
-						<div onclick="game.repeatCheck(this.id)" id="f" class="unpicked letter col-xs-3">f</div>
-						<div onclick="game.repeatCheck(this.id)" id="g" class="unpicked letter col-xs-3">g</div>
-						<div onclick="game.repeatCheck(this.id)" id="h" class="unpicked letter col-xs-3">h</div>
-						<div onclick="game.repeatCheck(this.id)" id="i" class="unpicked letter col-xs-3">i</div>
-						<div onclick="game.repeatCheck(this.id)" id="j" class="unpicked letter col-xs-3">j</div>
-						<div onclick="game.repeatCheck(this.id)" id="k" class="unpicked letter col-xs-3">k</div>
-						<div onclick="game.repeatCheck(this.id)" id="l" class="unpicked letter col-xs-3">l</div>
-						<div onclick="game.repeatCheck(this.id)" id="m" class="unpicked letter col-xs-3">m</div>
-						<div onclick="game.repeatCheck(this.id)" id="n" class="unpicked letter col-xs-3">n</div>
-						<div onclick="game.repeatCheck(this.id)" id="o" class="unpicked letter col-xs-3">o</div>
-						<div onclick="game.repeatCheck(this.id)" id="p" class="unpicked letter col-xs-3">p</div>
-						<div onclick="game.repeatCheck(this.id)" id="q" class="unpicked letter col-xs-3">q</div>
-						<div onclick="game.repeatCheck(this.id)" id="r" class="unpicked letter col-xs-3">r</div>
-						<div onclick="game.repeatCheck(this.id)" id="s" class="unpicked letter col-xs-3">s</div>
-						<div onclick="game.repeatCheck(this.id)" id="t" class="unpicked letter col-xs-3">t</div>
-						<div onclick="game.repeatCheck(this.id)" id="u" class="unpicked letter col-xs-3">u</div>
-						<div onclick="game.repeatCheck(this.id)" id="v" class="unpicked letter col-xs-3">v</div>
-						<div onclick="game.repeatCheck(this.id)" id="w" class="unpicked letter col-xs-3">w</div>
-						<div onclick="game.repeatCheck(this.id)" id="x" class="unpicked letter col-xs-3">x</div>
-						<div onclick="game.repeatCheck(this.id)" id="y" class="unpicked letter col-xs-3">y</div>
-						<div onclick="game.repeatCheck(this.id)" id="z" class="unpicked letter col-xs-3">z</div>
-					</div> <!-- End letter grid -->
-
-					
-
-					<!-- The grid of guessed/unguessed letter. Clicking on a valid letter will submit a guess -->
-					
-				</div>
-				
-				<div class="row">
 					<div class="hud" id="messageDisplay"></div>
+				</div>		
+				<div class="row">
 					<div class="hud" id="solvedDisplay"></div>
 				</div>
 			</div>
 		</div>
 	</div>
-
+	<!-- <footer class="footer fixed">&copy; Richard Staub 2017</footer> -->
 	<script src="assets/js/jquery.js"></script>
 	<script src="assets/js/bootstrap.js"></script>
 	<script src="assets/js/game.js"></script>

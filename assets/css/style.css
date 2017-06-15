@@ -37,24 +37,24 @@ body {
 .hud {
 	background-color: transparent;
 	color: #9bf3ff;
-	font-size: 200%;
+	font-size: 150%;
 	font-family: 'Orbitron', sans-serif;
 	text-shadow: 2px 2px 20px #0ae0fc;
 }
 
 .letter {
 	text-align: center;
+	font-size: 200%;
 }
 
 .letterBox {
-	border-radius: 5px;
+	border-radius: 10px;
 	border-style: solid;
 	border-width: 1px;
 	border-top-color: #9bf3ff;
 	border-left-color: #9bf3ff;
 	border-right-color: #0e6768;
 	border-bottom-color: #0e6768;
-	/*box-shadow: 3px 3px 10px #0ae0fc;*/
 	padding-top: 25px;
 	padding-bottom: 25px;
 }
@@ -97,7 +97,7 @@ body {
 	border-style: none;
 	position: absolute;
 	top: 22px;
-	right: 250px;
+	right: 220px;
 }
 
 #muteButton:hover {
@@ -126,8 +126,9 @@ body {
 
 #solvedDisplay {
 	letter-spacing: 20px;
-	font-size: 400%;
+	font-size: 500%;
 	text-align: center;
+	margin-top: 60px;
 }
 
 /*#spacer {
