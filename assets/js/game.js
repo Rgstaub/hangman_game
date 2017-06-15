@@ -54,6 +54,7 @@ var game = {
 	lives: 3,
 	level: 1,
 	muted: false,
+	hints: 3,
 	
 	toggleSound: function(className) {
 		
@@ -76,6 +77,7 @@ var game = {
 		game.guessed = [];
 		game.health = 6;
 		game.lives = 3;
+		game.hints = 3;
 		game.solution = game.catalog[Math.floor(Math.random() * game.catalog.length)].split("");
 		console.log("Solution: " + game.solution);
 		for (i = 0; i < game.solution.length; i++) {
@@ -90,7 +92,6 @@ var game = {
 	},
 
 	newPuzzle: function() {
-		
 		game.solvedSet = [];
 		game.guessed = [];
 		game.health = 6;
@@ -108,6 +109,8 @@ var game = {
 		document.getElementById("healthDisplay").innerHTML = "Guesses Remaining: " + game.health;
 		document.getElementById("livesDisplay").innerHTML = "Lives Remaining: " + game.lives;
 		document.getElementById("levelDisplay").innerHTML = "Level: " + game.level;
+		document.getElementById("hintCounter").innerHTML = "Hints Remaining: " + game.hints;
+		document.getElementById("hintIcon").className = "hintsOn glyphicon glyphicon-search";
 		//loop through all of the 'letter'elements to reset the CSS to the un-guessed state
 		var alphabet = document.getElementsByClassName("letter");
 		for (var i = 0; i < alphabet.length; i++) {
@@ -115,6 +118,41 @@ var game = {
 		}
 	},
 
+	hint: function() {
+		if(game.hints > 1) {
+			game.hints--;
+			var letterList = document.getElementsByClassName("unpicked")
+			console.log(letterList);
+			document.getElementById("hintCounter").innerHTML = "Hints Remaining: " + game.hints;
+			for (var i = 0; i < letterList.length; i++) {
+				console.log("loop: " + i);
+				console.log("should list each letter once: " + letterList[i].id);
+				if (game.solution.indexOf(letterList[i].id) !== -1) {
+					console.log(game.solution.indexOf(letterList[i].id) + " " + letterList[i].id);
+				}
+				else {
+					letterList[i].className = "picked letter col-xs-3";
+				}			
+			}
+		}
+		else if(game.hints === 1) {
+			game.hints--;
+			var letterList = document.getElementsByClassName("unpicked")
+			console.log(letterList);
+			document.getElementById("hintCounter").innerHTML = "Hints Remaining: " + game.hints;
+			for (var i = 0; i < letterList.length; i++) {
+				console.log("loop: " + i);
+				console.log("should list each letter once: " + letterList[i].id);
+				if (game.solution.indexOf(letterList[i].id) !== -1) {
+					console.log(game.solution.indexOf(letterList[i].id) + " " + letterList[i].id);
+				}
+				else {
+					letterList[i].className = "picked letter col-xs-3";
+				}			
+			}
+			document.getElementById("hintIcon").className = "hintsOff glyphicon glyphicon-search";
+		}	
+	},
 
 
 	//check if key pressed is a valid a - z character. Caps are allowed. If yes, pass it on
@@ -166,7 +204,7 @@ var game = {
 			game.health--;
 			console.log("Incorrect Guess. " + game.health + " health remaining");
 			document.getElementById("healthDisplay").innerHTML = "Guesses Remaining: " + game.health;
-			document.getElementById("messageDisplay").innerHTML = "(" + letter + ") Incorrect";
+			document.getElementById("messageDisplay").innerHTML = "(" + letter + ")<br> Incorrect";
 			if (game.muted === false) {
 				document.getElementById("incorrectSound").play();
 			}

@@ -11,13 +11,13 @@
 </head>
 <body>
 	<!-- Link the audio assets to be called by Javascript -->
-	<audio id="backGroundMusic" src="assets/sounds/music.mp3" autoplay loop>Your browser is not compatible with this site's audio</audio>
-	<audio  id="correctSound" src="assets/sounds/correct.mp3"></audio>
-	<audio id="incorrectSound" src="assets/sounds/incorrectTrimmed.mp3"></audio>
-	<audio id="newGameSound" src="assets/sounds/newGameTrimmed.mp3"></audio>
-	<audio id="nextLevelSound" src="assets/sounds/nextLevel.mp3"></audio>
-	<audio id="invalidKeySound" src="assets/sounds/invalid.wav" type="audio/wav"></audio>
-	<audio id="diedSound" src="assets/sounds/died.mp3"></audio>
+	<audio id="backGroundMusic" src="assets/sounds/music.mp3" type="audio/mp3" autoplay loop>Your browser is not compatible with this site's audio</audio>
+	<audio id="correctSound" src="assets/sounds/correct.mp3" type="audio/mp3"></audio>
+	<audio id="incorrectSound" src="assets/sounds/incorrectTrimmed.mp3" type="audio/mp3"></audio>
+	<audio id="newGameSound" src="assets/sounds/newGameTrimmed.mp3" type="audio/mp3"></audio>
+	<audio id="nextLevelSound" src="assets/sounds/nextLevel.mp3" type="audio/mp3"></audio>
+	<audio id="invalidKeySound" src="assets/sounds/invalid.mp3" type="audio/mp3"></audio>
+	<audio id="diedSound" src="assets/sounds/died.mp3" type="audio/mp3"></audio>
 	<!-- Scrolling star background -->
 	<div id="foreground">
 		<div id="midground">
@@ -36,6 +36,10 @@
 							<br>
 							<div id="healthDisplay"></div>
 							<div id="livesDisplay"></div>
+							<div id="hintsDisplay">
+								<span id="hintIcon" onclick="game.hint()" class="hintsOn glyphicon glyphicon-search"></span>
+								<span id="hintCounter"></span>
+							</div>
 							<div id="levelDisplay"></div>
 						</div>
 					</div>
@@ -73,7 +77,7 @@
 					<div class="hud" id="messageDisplay"></div>
 				</div>		
 				<div class="row">
-					<div class="hud" id="solvedDisplay"></div>
+					<div class="hud letterBox" id="solvedDisplay"></div>
 				</div>
 			</div>
 		</div>

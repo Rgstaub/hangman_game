@@ -22,16 +22,16 @@ body {
 	border: yellow 1px dashed;
 }*/
 
-.fadeOut {
-	opacity: 0;
-}
-
-.visible {
-	opacity: 1;
-}
 
 .gameBox {
 	margin-top: 30px;
+	padding-left: 30px;
+	padding-right: 30px;
+}
+
+.hintsOff {
+	color: #555;
+	text-shadow: none;
 }
 
 .hud {
@@ -57,6 +57,7 @@ body {
 	border-bottom-color: #0e6768;
 	padding-top: 25px;
 	padding-bottom: 25px;
+	background-color: rgba(0, 0, 0, 0.5)
 }
 
 .opaque {
@@ -77,6 +78,16 @@ body {
 	color: #fff;
 	text-shadow: 2px 2px 20px #fff;
 	transition: all .5s;
+}
+
+#hintIcon.hintsOn:hover {
+	color: #fafcea;
+	text-shadow: 2px 2px 20px #def957;
+	transition: all .5s;
+}
+
+#hintIcon.hintsOff:hover {
+
 }
 
 #messageDisplay {
@@ -126,7 +137,7 @@ body {
 
 #solvedDisplay {
 	letter-spacing: 20px;
-	font-size: 500%;
+	font-size: 300%;
 	text-align: center;
 	margin-top: 60px;
 }
@@ -140,7 +151,7 @@ body {
 #midground {
 	background: url(../images/midground.png) repeat 20% 20%;
 	position: absolute;
-	top: 0; left: 6px; right: 0; bottom: 0;
+	top: 0; left: 0; right: 0; bottom: 0;
 	z-index: 200;
 	
 	-webkit-animation-name: STAR-MOVE;
