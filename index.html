@@ -18,6 +18,7 @@
 	<audio id="nextLevelSound" src="assets/sounds/nextLevel.mp3" type="audio/mp3"></audio>
 	<audio id="invalidKeySound" src="assets/sounds/invalid.mp3" type="audio/mp3"></audio>
 	<audio id="diedSound" src="assets/sounds/died.mp3" type="audio/mp3"></audio>
+	<audio id="hintSound" src="assets/sounds/appear.mp3" type="audio/mp3"></audio>
 	<!-- Scrolling star background -->
 	<div id="foreground">
 		<div id="midground">
@@ -31,13 +32,13 @@
 								<span>
 									<span id="muteButton" onclick="game.toggleSound(this.className)" class="glyphicon glyphicon-volume-up"></span>
 								</span>
-								<button class="btn btn-deault" id="newGameBtn">New Game</button>
+								<button onclick="game.newGame()" class="btn btn-deault" id="newGameBtn">New Game</button>
 							</div>
 							<br>
 							<div id="healthDisplay"></div>
 							<div id="livesDisplay"></div>
 							<div id="hintsDisplay">
-								<span id="hintIcon" onclick="game.hint()" class="hintsOn glyphicon glyphicon-search"></span>
+								<span id="hintIcon" onclick="game.hint()" class="hintsOn glyphicon glyphicon-question-sign"></span>
 								<span id="hintCounter"></span>
 							</div>
 							<div id="levelDisplay"></div>
@@ -82,7 +83,7 @@
 			</div>
 		</div>
 	</div>
-	<!-- <footer class="footer fixed">&copy; Richard Staub 2017</footer> -->
+	<footer class="footer">&copy; Richard Staub 2017</footer>
 	<script src="assets/js/jquery.js"></script>
 	<script src="assets/js/bootstrap.js"></script>
 	<script src="assets/js/game.js"></script>

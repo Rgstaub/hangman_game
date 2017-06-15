@@ -22,6 +22,16 @@ body {
 	border: yellow 1px dashed;
 }*/
 
+.footer {
+	text-align: center;
+	background-color: rgba(0, 0, 0, 0.8);
+	color: #999;
+	height: 35px;
+	line-height: 35px;
+	position: fixed;
+	bottom: 0px;
+	width: 100%;
+}
 
 .gameBox {
 	margin-top: 30px;
@@ -80,14 +90,14 @@ body {
 	transition: all .5s;
 }
 
+#hintIcon {
+	margin-right: 10px;
+}
+
 #hintIcon.hintsOn:hover {
 	color: #fafcea;
 	text-shadow: 2px 2px 20px #def957;
 	transition: all .5s;
-}
-
-#hintIcon.hintsOff:hover {
-
 }
 
 #messageDisplay {
@@ -108,7 +118,7 @@ body {
 	border-style: none;
 	position: absolute;
 	top: 22px;
-	right: 220px;
+	right: 200px;
 }
 
 #muteButton:hover {
@@ -141,12 +151,6 @@ body {
 	text-align: center;
 	margin-top: 60px;
 }
-
-/*#spacer {
-	position: fixed;
-	bottom: 50%;
-}*/
-
 
 #midground {
 	background: url(../images/midground.png) repeat 20% 20%;

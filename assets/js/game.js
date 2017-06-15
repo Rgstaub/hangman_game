@@ -110,7 +110,7 @@ var game = {
 		document.getElementById("livesDisplay").innerHTML = "Lives Remaining: " + game.lives;
 		document.getElementById("levelDisplay").innerHTML = "Level: " + game.level;
 		document.getElementById("hintCounter").innerHTML = "Hints Remaining: " + game.hints;
-		document.getElementById("hintIcon").className = "hintsOn glyphicon glyphicon-search";
+		document.getElementById("hintIcon").className = "hintsOn glyphicon glyphicon-question-sign";
 		//loop through all of the 'letter'elements to reset the CSS to the un-guessed state
 		var alphabet = document.getElementsByClassName("letter");
 		for (var i = 0; i < alphabet.length; i++) {
@@ -121,39 +121,36 @@ var game = {
 	hint: function() {
 		if(game.hints > 1) {
 			game.hints--;
-			var letterList = document.getElementsByClassName("unpicked")
-			console.log(letterList);
-			document.getElementById("hintCounter").innerHTML = "Hints Remaining: " + game.hints;
-			for (var i = 0; i < letterList.length; i++) {
-				console.log("loop: " + i);
-				console.log("should list each letter once: " + letterList[i].id);
-				if (game.solution.indexOf(letterList[i].id) !== -1) {
-					console.log(game.solution.indexOf(letterList[i].id) + " " + letterList[i].id);
-				}
-				else {
-					letterList[i].className = "picked letter col-xs-3";
-				}			
-			}
+			game.hintParse();
 		}
 		else if(game.hints === 1) {
 			game.hints--;
-			var letterList = document.getElementsByClassName("unpicked")
-			console.log(letterList);
-			document.getElementById("hintCounter").innerHTML = "Hints Remaining: " + game.hints;
-			for (var i = 0; i < letterList.length; i++) {
-				console.log("loop: " + i);
-				console.log("should list each letter once: " + letterList[i].id);
-				if (game.solution.indexOf(letterList[i].id) !== -1) {
-					console.log(game.solution.indexOf(letterList[i].id) + " " + letterList[i].id);
-				}
-				else {
-					letterList[i].className = "picked letter col-xs-3";
-				}			
-			}
-			document.getElementById("hintIcon").className = "hintsOff glyphicon glyphicon-search";
+			game.hintParse();
+			document.getElementById("hintIcon").className = "hintsOff glyphicon glyphicon-question-sign";
+		}
+		else {
+			document.getElementById("invalidKeySound").play();
 		}	
 	},
 
+	hintParse: function() {
+		var letterList = document.getElementsByClassName("unpicked")
+		console.log(letterList);
+		document.getElementById("hintSound").play();
+		document.getElementById("hintCounter").innerHTML = "Hints Remaining: " + game.hints;
+		for (var j = 0; j < letterList.length; j++) {
+			console.log("loop: " + j);
+			console.log("should list each letter once: " + letterList[j].id);
+			if (game.solution.indexOf(letterList[j].id) !== -1) {
+				console.log(game.solution.indexOf(letterList[j].id) + " " + letterList[j].id);
+			}
+			else {
+				letterList[j].className = "picked letter col-xs-3";
+				game.guessed.push(letterList[j].id);
+				console.log(game.guessed);
+			}			
+		}
+	},
 
 	//check if key pressed is a valid a - z character. Caps are allowed. If yes, pass it on
 	//to the next function
@@ -169,6 +166,7 @@ var game = {
 			if (game.muted === false) {
 				document.getElementById("invalidKeySound").play();
 			}
+			document.getElementById("messageDisplay").innerHTML = "Invalid Key";
 		}
 	},
 
@@ -186,6 +184,7 @@ var game = {
 				document.getElementById("invalidKeySound").play();
 			}
 			console.log("invalid letter");
+			document.getElementById("messageDisplay").innerHTML = "Already Guessed";
 		}
 	},
 
@@ -280,7 +279,7 @@ var game = {
 $(document).ready(game.newGame());
 
 // Click the NEW GAME button to start a new game
-document.getElementById("newGameBtn").addEventListener("click", game.newGame); 
+// document.getElementById("newGameBtn").addEventListener("click", game.newGame); 
 
 // Start the game process tree on key release
 document.onkeyup = function(event) {
