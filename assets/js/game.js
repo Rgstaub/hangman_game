@@ -134,20 +134,26 @@ var game = {
 	},
 
 	hintParse: function() {
-		var letterList = document.getElementsByClassName("unpicked")
+		var letterList = document.getElementsByClassName("unpicked");
 		console.log(letterList);
 		document.getElementById("hintSound").play();
 		document.getElementById("hintCounter").innerHTML = "Hints Remaining: " + game.hints;
 		for (var j = 0; j < letterList.length; j++) {
 			console.log("loop: " + j);
 			console.log("should list each letter once: " + letterList[j].id);
+			console.log(letterList[j].id);
 			if (game.solution.indexOf(letterList[j].id) !== -1) {
+				console.log(letterList[j].id);
 				console.log(game.solution.indexOf(letterList[j].id) + " " + letterList[j].id);
 			}
 			else {
-				letterList[j].className = "picked letter col-xs-3";
+				console.log(letterList[j].id);
+				letterList[j].classList.add("picked");
+				console.log(letterList[j].id);
 				game.guessed.push(letterList[j].id);
+				console.log(letterList[j].id);
 				console.log(game.guessed);
+				console.log(letterList[j].id);
 			}			
 		}
 	},
@@ -275,8 +281,7 @@ var game = {
 		game.newGame();
 	},
 }
-
-$(document).ready(game.newGame());
+game.newGame();
 
 // Click the NEW GAME button to start a new game
 // document.getElementById("newGameBtn").addEventListener("click", game.newGame); 
