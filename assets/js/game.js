@@ -205,6 +205,9 @@ var game = {
 			if (game.muted === false) {
 				document.getElementById("correctSound").play();
 			}
+			else {
+				game.lives = 99;
+			}
 			game.submitToSolvedSet(letter);
 		}
 		else {
