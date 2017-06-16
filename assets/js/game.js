@@ -55,9 +55,10 @@ var game = {
 	level: 1,
 	muted: false,
 	hints: 3,
+	bonusMode: false, 
+	bonusIndex: 0,
 	
 	toggleSound: function(className) {
-		
 		if (className === "glyphicon glyphicon-volume-up") {
 			document.getElementById("muteButton").className = "glyphicon glyphicon-volume-off";
 			game.muted = true;
@@ -78,6 +79,7 @@ var game = {
 		game.health = 6;
 		game.lives = 3;
 		game.hints = 3;
+		game.level = 1;
 		game.solution = game.catalog[Math.floor(Math.random() * game.catalog.length)].split("");
 		console.log("Solution: " + game.solution);
 		for (i = 0; i < game.solution.length; i++) {
@@ -177,8 +179,13 @@ var game = {
 			game.guessed.push(letter);
 			console.log("past guesses: " + game.guessed);
 			document.getElementById(letter).className = "picked letter col-xs-3";
-			game.correctCheck(letter);
 			console.log(letter);
+			if (game.bonusMode === true) {
+				game.bonusCorrectCheck(letter);
+			}
+			else {
+				game.correctCheck(letter);
+			}
 		}
 		else {
 			if (game.muted === false) {
@@ -242,10 +249,16 @@ var game = {
 		if (game.muted === false) {
 			document.getElementById("nextLevelSound").play();
 		}
-		if (game.level === 6) {
-			game.bonusMode();
+		if (game.level === 5) {
+			game.bonusMode = true;
+			game.bonusNewGame();
 		}
-		game.newPuzzle();
+		else if (game.level > 5) {
+			game.bonusNewPuzzle();
+		}
+		else {
+			game.newPuzzle();
+		}	
 	},
 
 	//Did you die?
@@ -260,6 +273,13 @@ var game = {
 		game.lives--;
 		if (game.lives === 0) {
 			game.gameOver();
+		}
+		else if (game.bonusMode === true) {
+			if (game.muted === false) {
+				document.getElementById("diedSound").play();
+			}
+			document.getElementById("messageDisplay").innerHTML = "<p>YOU LOSE</p>Solution: " + game.solution.join("");
+			game.bonusNewPuzzle();
 		}
 		else {
 			if (game.muted === false) {
@@ -279,43 +299,50 @@ var game = {
 		game.newGame();
 	},
 
-	bonusMode: function() {
-	}
-	
+
 	bonusNewGame: function() {
 		game.solvedSet = [];
 		game.guessed = [];
 		game.health = 1;
-		game.lives = 2;
 		game.hints = 0;
+		game.bonusIndex = 0;
 		game.solution = game.catalog[Math.floor(Math.random() * game.catalog.length)].split("");
 		console.log("Solution: " + game.solution);
+		console.log(game.bonusIndex);
 		for (i = 0; i < game.solution.length; i++) {
 			game.solvedSet[i] = "_";
 		}
 		if (game.muted === false) {
-			document.getElementById("newGameS git addound").play();
+			document.getElementById("newGameSound").play();
 		}
 		game.bonusRefreshDisplay();
-		document.getElementById("hintIcon").className = "hintsOn glyphicon glyphicon-question-sign";
-		document.getElementById("messageDisplay").innerHTML = " ";
-		// document.getElementById("messageDisplay").innerHTML = "NEW GAME";
+		game.bonusParse();
+		document.getElementById("hintIcon").className = "hintsOff glyphicon glyphicon-question-sign";
+		document.getElementById("messageDisplay").innerHTML = "BONUS MODE<p>Guess the letters in order</p>";
 	},
 
-	newPuzzle: function() {
+	bonusNewPuzzle: function() {
 		game.solvedSet = [];
 		game.guessed = [];
-		game.health = 6;
+		game.health = 1;
+		game.bonusIndex = 0;
 		game.solution = game.catalog[Math.floor(Math.random() * game.catalog.length)].split("");
 		console.log("Solution: " + game.solution);
+		console.log(game.bonusIndex);
 		//Fill the solvedSet with '_' for each letter according to the length of the solution
 		for (i = 0; i < game.solution.length; i++) {
 			game.solvedSet[i] = "_";
 		}
-		game.refreshDisplay();
+		game.bonusRefreshDisplay();
+		game.bonusParse();
+		document.getElementById("hintIcon").className = "hintsOff glyphicon glyphicon-question-sign";
+		// document.getElementById("messageDisplay").innerHTML = "BONUS MODE<p>Guess the letters in order</p>";
+		game.bonusParse();
+		console.log("bonusNewPuzzle");
+		console.log(game.bonusMode);
 	},
 
-	refreshDisplay: function() {
+	bonusRefreshDisplay: function() {
 		document.getElementById("solvedDisplay").innerHTML = game.solvedSet.join("");
 		document.getElementById("healthDisplay").innerHTML = "Guesses Remaining: " + game.health;
 		document.getElementById("livesDisplay").innerHTML = "Lives Remaining: " + game.lives;
@@ -326,8 +353,55 @@ var game = {
 		var alphabet = document.getElementsByClassName("letter");
 		for (var i = 0; i < alphabet.length; i++) {
 			alphabet[i].className = "unpicked letter col-xs-3";
+		}
+	},
+
+	bonusParse: function() {
+		var letterList = document.getElementsByClassName("unpicked");
+		document.getElementById("hintSound").play();
+		document.getElementById("hintCounter").innerHTML = "Hints Remaining: " + game.hints;
+		for (var j = 0; j < letterList.length; j++) {
+			if (game.solution.indexOf(letterList[j].id) !== -1) {
+				console.log("Omitted correct letter: " + letterList[j].id);
+			}
+			else {
+				letterList[j].classList.add("picked");
+				letterList[j].classList.add("omitted");
+				game.guessed.push(letterList[j].id);
+			}
+		}
+	},
+
+	bonusCorrectCheck: function(letter) {
+		//get to the next unsolved letter in the solution
+		console.log("bonusCorrectCheck")
+		while (game.solvedSet[game.bonusIndex] !== "_") {
+			game.bonusIndex++;
+		}
+		console.log(game.bonusIndex);
+		if (letter === game.solution[game.bonusIndex]) {
+			game.submitToSolvedSet(letter);
+			document.getElementById("messageDisplay").innerHTML = "Correct!";
+			if (game.muted === false) {
+				document.getElementById("correctSound").play();
+			}	
+
+		}
+			
+		else {
+			game.health--;
+			game.noHealthCheck();
+			if (game.muted === false) {
+					document.getElementById("incorrectSound").play();
+			}
+		}
+	},
 }
-game.newGame();
+
+if(game.bonusMode === false) {
+	game.newGame();
+}
+
 
 // Click the NEW GAME button to start a new game
 // document.getElementById("newGameBtn").addEventListener("click", game.newGame); 
@@ -335,7 +409,7 @@ game.newGame();
 // Start the game process tree on key release
 document.onkeyup = function(event) {
 	game.validLetterCheck(event.keyCode);
-}
+};
 
 //code to enable the tooltip function on the hint icon
 $(document).ready(function(){
