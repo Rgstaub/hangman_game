@@ -25,7 +25,7 @@
 			<!-- Game content area -->
 			<div class="container-fluid gameBox">
 					<div class="row">
-					<!-- The grid of guessed/unguessed letter. Clicking on a valid letter will submit a guess -->
+					<!-- The game controls and info panel -->
 					<div class="col-md-6 col-xs-12 right panel hud">
 						<div class="panel-body">
 							<div class="controls">
@@ -44,6 +44,7 @@
 							<div id="levelDisplay"></div>
 						</div>
 					</div>
+					<!-- The grid of guessed/unguessed letter. Clicking on a valid letter will submit a guess -->
 					<div class="hud col-xs-12 col-md-6 letterBox">
 						<div class="row">
 							<div onclick="game.repeatCheck(this.id)" id="a" class="unpicked letter col-xs-3">a</div>
@@ -74,9 +75,10 @@
 							<div onclick="game.repeatCheck(this.id)" id="z" class="unpicked letter col-xs-3">z</div>
 						</div> <!-- End letter grid -->
 					</div>
-
+					<!-- The area where alert messages will appear -->
 					<div class="hud col-xs-12 col-md-6" id="messageDisplay"></div>
 				</div>		
+				<!-- The answer window -->
 				<div class="row">
 					<div class="hud letterBox" id="solvedDisplay"></div>
 				</div>

@@ -15,7 +15,7 @@
 	if correct, reveal the letter(s)
 */
 
-// The hangman game object
+// The hangman game object includes all game functions within it
 var game = {
 	catalog: ["abruptly", "absurd", "abyss", "affix", "askew", "avenue", "awkward", 
 				"axiom", "azure", "bagpipes", "bandwagon", "banjo", "bayou", "beekeeper", 
@@ -58,6 +58,7 @@ var game = {
 	bonusMode: false, 
 	bonusIndex: 0,
 	
+	//The logic for the mute button. Set mute to true or false and toggle the icon
 	toggleSound: function(className) {
 		if (className === "glyphicon glyphicon-volume-up") {
 			document.getElementById("muteButton").className = "glyphicon glyphicon-volume-off";
@@ -81,6 +82,7 @@ var game = {
 		game.hints = 3;
 		game.level = 1;
 		game.solution = game.catalog[Math.floor(Math.random() * game.catalog.length)].split("");
+		//Create a "solvedSet" array by copying the solution and replacing letters with "_"
 		console.log("Solution: " + game.solution);
 		for (i = 0; i < game.solution.length; i++) {
 			game.solvedSet[i] = "_";
@@ -91,9 +93,9 @@ var game = {
 		game.refreshDisplay();
 		document.getElementById("hintIcon").className = "hintsOn glyphicon glyphicon-question-sign";
 		document.getElementById("messageDisplay").innerHTML = " ";
-		// document.getElementById("messageDisplay").innerHTML = "NEW GAME";
 	},
 
+	//Get a new puzzle after a win or loss, do not reset hints, lives, level, or messageDisplay
 	newPuzzle: function() {
 		game.solvedSet = [];
 		game.guessed = [];
@@ -107,6 +109,7 @@ var game = {
 		game.refreshDisplay();
 	},
 
+	//Refresh the HTML for new game or puzzle
 	refreshDisplay: function() {
 		document.getElementById("solvedDisplay").innerHTML = game.solvedSet.join("");
 		document.getElementById("healthDisplay").innerHTML = "Guesses Remaining: " + game.health;
@@ -121,6 +124,7 @@ var game = {
 		}
 	},
 
+	//The logic for counting hints and turning off when no hints remain
 	hint: function() {
 		if(game.hints > 1) {
 			game.hints--;
@@ -136,6 +140,7 @@ var game = {
 		}	
 	},
 
+	//look through all unpicked letters, excluding correct andswers, and remove half of the wrong letters
 	hintParse: function() {
 		var letterList = document.getElementsByClassName("unpicked");
 		document.getElementById("hintSound").play();
@@ -302,7 +307,7 @@ var game = {
 		game.newGame();
 	},
 
-
+	//new game for Bonus Mode.
 	bonusNewGame: function() {
 		game.solvedSet = [];
 		game.guessed = [];
@@ -324,6 +329,7 @@ var game = {
 		document.getElementById("messageDisplay").innerHTML = "BONUS MODE<p>Guess the letters in order</p>";
 	},
 
+	//new puzzle for bonus mode
 	bonusNewPuzzle: function() {
 		game.solvedSet = [];
 		game.guessed = [];
@@ -345,6 +351,7 @@ var game = {
 		console.log(game.bonusMode);
 	},
 
+	//refresh for Bonus Mode
 	bonusRefreshDisplay: function() {
 		document.getElementById("solvedDisplay").innerHTML = game.solvedSet.join("");
 		document.getElementById("healthDisplay").innerHTML = "Guesses Remaining: " + game.health;
@@ -359,6 +366,7 @@ var game = {
 		}
 	},
 
+	//remove ALL of the incorrect letters for Bonus Mode
 	bonusParse: function() {
 		var letterList = document.getElementsByClassName("unpicked");
 		document.getElementById("hintSound").play();
@@ -375,22 +383,20 @@ var game = {
 		}
 	},
 
+	//New logic for correct answers in bonus mode
 	bonusCorrectCheck: function(letter) {
-		//get to the next unsolved letter in the solution
-		console.log("bonusCorrectCheck")
+		//get to the next unsolved letter in the solution. This is the position where the answer will be evaluated
 		while (game.solvedSet[game.bonusIndex] !== "_") {
 			game.bonusIndex++;
 		}
-		console.log(game.bonusIndex);
+		//check if the input matches the letter at the current answer position
 		if (letter === game.solution[game.bonusIndex]) {
 			game.submitToSolvedSet(letter);
 			document.getElementById("messageDisplay").innerHTML = "Correct!";
 			if (game.muted === false) {
 				document.getElementById("correctSound").play();
 			}	
-
 		}
-			
 		else {
 			game.health--;
 			game.noHealthCheck();
@@ -401,13 +407,12 @@ var game = {
 	},
 }
 
-if(game.bonusMode === false) {
-	game.newGame();
-}
-
-
-// Click the NEW GAME button to start a new game
-// document.getElementById("newGameBtn").addEventListener("click", game.newGame); 
+//Initialize the gane at load
+document.addEventListener("DOMContentLoaded", function() {
+	if(game.bonusMode === false) {
+		game.newGame();
+	}
+});
 
 // Start the game process tree on key release
 document.onkeyup = function(event) {
